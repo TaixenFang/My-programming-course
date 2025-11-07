@@ -16,7 +16,7 @@ def read_oscillatory_wave_data(filename):
     amplitudes = data[:,1]
     mean_amplitude = np.mean(amplitudes)
     max_amplitude = np.max(amplitudes)
-    return lengths, float(mean_amplitude), float(max_amplitude)
+    return float(mean_amplitude), float(max_amplitude)
 print(read_oscillatory_wave_data("wave_data.csv"))
 
 
@@ -28,8 +28,7 @@ def read_standing_wave_data(filename):
     data = np.loadtxt(filename, delimiter = ',')
     lengths = data[:,0]
     tensions = data[:,1]
-    mass = 1
-    linear_density = mass/lengths
-    wave_speeds = np.sqrt(tensions/linear_density)
+    mu = 1
+    wave_speeds = np.sqrt(tensions)
     return np.array(wave_speeds)
 print(read_standing_wave_data("standing_wave.csv"))
