@@ -1,45 +1,68 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+
+
 # Function 1: Curve Plotting
-def plot_curve(x_values, y_values):
-    plt.scatter(x_values, y_values, marker="o", color="blue")
-    plt.title("Curve Plotting")
-    plt.xlabel("X")
-    plt.ylabel("Y")
-    plt.show()
-x_values = np.linspace(0,10,100)
-y_values = np.sin(x_values)
-plot_curve(x_values,y_values)
+def plot_curve(x_values, y_values): # Defining the function
+    plt.scatter(x_values, y_values, marker="o", color="green", linestyle="-")   # Setting the parameters for the scatter plot
+    plt.title("Curve Plotting")     # Title of the plot
+    plt.xlabel("Horizontal Axis")   # x-axis title
+    plt.ylabel("Vertical Axis")     # y-axis title
+    plt.grid(True)                  # Show gridlines on the plot
+    plt.show()                      # Display plot
+
+x_values = np.linspace(0, 10, 100)  # Using the x values from the example below
+y_values = np.sin(x_values)                         # Using the y values from the example below
+plot_curve(x_values, y_values)                      # Calling the function correctly
+
+
 
 # Function 2: Hertzsprung-Russell Diagram
-def plot_hr_diagram(temperature, luminosity):
-    plt.scatter(temperature, luminosity, c = temperature, edgecolors='g', cmap = "plasma")
-    plt.gca().invert_xaxis()
-    plt.title("Hertzsprung-Russell Diagram")
-    plt.xlabel("temperature")
-    plt.ylabel("luminosity")
-    plt.colorbar(label = 'Temperature')
-    plt.show()
-temperature = np.array([3000,5000,7000,9000,11000])
-luminosity = np.array([0.1, 1, 10, 100, 1000])
-plot_hr_diagram(temperature, luminosity)
+def plot_hr_diagram(temperature, luminosity):   # Defining the function
+    # Setting the parameters for the scatter, this time with edgecolors and cmap for a plasma color gradient
+    plt.scatter(temperature, luminosity, c=temperature, edgecolors='g', cmap="plasma")
+    plt.gca().invert_xaxis()    # We have to invert the X axis because we want to show the temperature decreasing with the luminosity
+    plt.title("Hertzsprung-Russell Diagram")    # Title of the plot
+    plt.xlabel("temperature (K)")               # x-axis title
+    plt.ylabel("luminosity")                    # y-axis title
+    plt.colorbar(label='Temperature')           # Creating a colorbar on the side that shows temperature from low to high
+    plt.show()                                  # Display plot
+
+temperature = np.array([3000, 5000, 7000, 9000, 11000]) # Array of data for temperature from the example below
+luminosity = np.array([0.1, 1, 10, 100, 1000])          # Array of data for luminosity from the example below
+plot_hr_diagram(temperature, luminosity)                # Calling the function
+
+
 
 # Function 3: Heat Map and Density Plot
-def plot_density(data, color_map='gray'):
-    return
+def plot_density(data, color_map='gray'):   # Defining the function, gray is the default color scheme
+    # Setting the data set for x and y coordinates, grid resolution of 50, heat map options, showing density instead of count
+    plt.hist2d(data[:,0], data [:,1], bins=50, cmap=color_map, density=True)
+    plt.title("Density Plotting")   # Title of the plot
+    plt.colorbar(label="Density")   # Creating a colorbar on the side that shows Density from low to high
+    plt.xlabel("x-axis")            # x-axis title
+    plt.ylabel("y-axis")            # y-axis title
+    plt.show()                      # Display plot
+
+np.random.seed(0)                   # Makes random numbers reproducible
+data = np.random.randn(1000,2)      # Generating 1000 points with 2 coordinates each
+plot_density(data, 'gray') # Calling the function
+
+
+
 # Example usage:
 if __name__ == "__main__":
     # Example for plot_curve
     x = np.linspace(0, 10, 100)
     y = np.sin(x)
     plot_curve(x, y)
-    
+
     # Example for plot_hr_diagram
     temp = np.array([3000, 5000, 7000, 9000, 11000])
     lum = np.array([0.1, 1, 10, 100, 1000])
     plot_hr_diagram(temp, lum)
-    
+
     # Example for plot_density
     np.random.seed(0)
     data = np.random.randn(1000, 2)  # Generating random 2D data
